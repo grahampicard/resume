@@ -1,0 +1,92 @@
+[
+  {
+    "id":0,
+    "category":"Education",
+    "beginning":"2010-01-01",
+    "ending":"2012-04-30",
+    "entry":"Pepperdine University",
+    "details":["BA Economics, BA Rhetoric","Florence, Italy International Program"],
+    "state": ["CA"],
+    "display_location": "Malibu, CA"
+  },
+  {
+    "id":1,
+    "category":"Work",
+    "beginning":"2010-05-01", 
+    "ending":"2010-08-01",
+    "entry":"United States House of Representatives",
+    "details":["Congressional Intern","Rep. John Campbell - California 48th"],
+    "state": ["VA"],
+    "display_location": "Washington, DC"
+  },
+  {
+    "id":2,
+    "category":"Work",
+    "beginning":"2012-05-01",
+    "ending":"2014-07-01",
+    "entry":"Teach for America",
+    "details":["Geometry + Algebra 2 Teacher, Greenville High School","Pathway Coordinator, School Leadership Team"],
+    "state": ["MS"],
+    "display_location": "Greenville, MS"
+  },
+  {
+    "id":3,
+    "category":"Work",
+    "beginning":"2014-07-01",
+    "ending":"2014-09-01",
+    "entry":"National Geographic - Ice Cream Expedition",
+    "details":["Educational programs for kids to learn what it means to be an explorer","Drove an ice cream truck"],
+    "state": ["GA", "AL", "TN", "KY", "IL", "MS", "LA"],
+    "display_location": "Various States"
+  },
+  {
+    "id":4,
+    "category":"Play",
+    "beginning":"2014-09-01",
+    "ending":"2018-01-01",
+    "entry":"Music",
+    "details":["Songwriting, scoring, arranging, and composition consulting","Guitar/Keys for local artists and church worship bands"],
+    "state": ["CA", "NY"],
+    "display_location": "San Francisco + OC, CA / New York, NY"
+  },
+  {
+    "id":5,
+    "category":"Work",
+    "beginning":"2014-12-01",
+    "ending":"2015-07-01",
+    "entry":"KIPP Foundation Research & Evaluation Team",
+    "details":["Analysis decks + presentations, grant proposal research","Automated reporting, Quantitative Modeling, VBA/SQL Server"],
+    "state": ["CA"],
+    "display_location": "San Francisco, CA"
+  },
+  {
+    "id":6,
+    "category":"Work",
+    "beginning":"2015-07-01",
+    "ending":"2018-08-01",
+    "entry":"KIPP Foundation Insight & Analytics Team",
+    "details":["Business intelligence product lead","Program evaluation, internal support, and data strategy","Database development"],
+    "state": ["CA", "NY"],
+    "display_location": "San Francisco, CA / New York, NY"
+  },
+  {
+    "id":7,
+    "category":"Play",
+    "beginning":"2013-11-01",
+    "ending":"2014-03-01",
+    "entry":"Delta Center Stage",
+    "details":["Cast member, Les Miserables"],
+    "state": ["MS"],
+    "display_location": "Greenville, MS"
+  },
+  {
+    "id": 8,
+    "category":"Education",
+    "beginning":"2018-08-01",
+    "ending": null,
+    "entry":"Yale School of Management",
+    "details":["MBA Candidate","Data Analytics Club Founder","Tech Club Leader"],
+    "state":["CT"],
+    "display_location": "New Haven, CT"
+  }
+]

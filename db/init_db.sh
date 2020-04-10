@@ -1,0 +1,1 @@
+mongoimport --jsonArray --db test --collection docs --file timeline.json
