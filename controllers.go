@@ -11,3 +11,11 @@ func indexController(w http.ResponseWriter, r *http.Request) {
 func resumeController(w http.ResponseWriter, r *http.Request) {
 	tmpl["resume"].Execute(w, nil)
 }
+
+func projectsController(w http.ResponseWriter, r *http.Request) {
+	tmpl["projects"].Execute(w, nil)
+}
+
+func aboutController(w http.ResponseWriter, r *http.Request) {
+	tmpl["about"].Execute(w, nil)
+}

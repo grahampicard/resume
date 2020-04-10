@@ -7,8 +7,11 @@ import (
 func getRoutes() chi.Router {
 
 	r := chi.NewRouter()
+
 	r.Get("/", indexController)
 	r.Get("/resume", resumeController)
+	r.Get("/about", aboutController)
+	r.Get("/projects", projectsController)
 	return r
 
 }
