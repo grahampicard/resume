@@ -1,0 +1,50 @@
+package main
+
+import (
+	"context"
+	"time"
+
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
+)
+
+type timelineEvent struct {
+	// ID        primitive.ObjectID `bson:"_id,omitempty"`
+	id        int      `bson:"id,omitempty"`
+	Category  string   `bson:"category,omitempty"`
+	Beginning string   `bson:"beginning,omitempty"`
+	Ending    string   `bson:"ending,omitempty"`
+	Entry     string   `bson:"entry,omitempty"`
+	Details   []string `bson:"details,omitempty"`
+	State     []string `bson:"state,omitempty"`
+}
+
+func getEvents() []timelineEvent {
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	client, err := mongo.Connect(ctx, options.Client().ApplyURI("mongodb://localhost:27017"))
+
+	// Defers prevent data leaks
+	defer cancel()
+	defer client.Disconnect(ctx)
+	if err != nil {
+		panic(err)
+	}
+
+	// Create
+	timelineCollection := client.Database("test").Collection("docs")
+	cursor, err := timelineCollection.Find(ctx, bson.M{})
+
+	if err != nil {
+		panic(err)
+	}
+
+	var events []timelineEvent
+	if err = cursor.All(ctx, &events); err != nil {
+		panic(err)
+	}
+
+	return events
+}
+
+var events = getEvents()

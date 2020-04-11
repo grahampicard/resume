@@ -1,15 +1,13 @@
 package main
 
-import (
-	"net/http"
-)
+import "net/http"
 
 func indexController(w http.ResponseWriter, r *http.Request) {
 	tmpl["index"].Execute(w, nil)
 }
 
 func resumeController(w http.ResponseWriter, r *http.Request) {
-	tmpl["resume"].Execute(w, nil)
+	tmpl["resume"].Execute(w, events)
 }
 
 func projectsController(w http.ResponseWriter, r *http.Request) {

@@ -14,5 +14,6 @@ func getEnv(key string, fallback string) string {
 
 func main() {
 	r := getRoutes()
+	r.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
 	http.ListenAndServe(":"+getEnv("PORT", "8080"), r)
 }
