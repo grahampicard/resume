@@ -1,8 +1,6 @@
 package main
 
-import (
-	"html/template"
-)
+import "html/template"
 
 var tmpl = make(map[string]*template.Template)
 
@@ -11,11 +9,9 @@ func init() {
 	p := template.ParseFiles
 
 	// Pages
-	//// Home
 	tmpl["index"] = m(p("views/index.gohtml", "views/layout.gohtml"))
-
-	//// Detail
 	tmpl["resume"] = m(p("views/resume.gohtml", "views/layout.gohtml"))
 	tmpl["about"] = m(p("views/about.gohtml", "views/layout.gohtml"))
 	tmpl["projects"] = m(p("views/projects.gohtml", "views/layout.gohtml"))
+
 }
