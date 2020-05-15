@@ -11,7 +11,7 @@ import (
 
 type timelineEvent struct {
 	// ID        primitive.ObjectID `bson:"_id,omitempty"`
-	id        int      `bson:"id,omitempty"`
+	ID        int      `bson:"id,omitempty"`
 	Category  string   `bson:"category,omitempty"`
 	Beginning string   `bson:"beginning,omitempty"`
 	Ending    string   `bson:"ending,omitempty"`
@@ -31,7 +31,7 @@ func getEvents() []timelineEvent {
 		panic(err)
 	}
 
-	// Create
+	// Get most recent timeline data
 	timelineCollection := client.Database("test").Collection("docs")
 	cursor, err := timelineCollection.Find(ctx, bson.M{})
 
