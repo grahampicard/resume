@@ -17,3 +17,5 @@ func projectsController(w http.ResponseWriter, r *http.Request) {
 func aboutController(w http.ResponseWriter, r *http.Request) {
 	tmpl["about"].Execute(w, nil)
 }
+
+var events = getEvents()

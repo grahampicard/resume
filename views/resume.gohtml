@@ -51,6 +51,8 @@ Resume
     }
   })
 
+  timelineData.sort((i, j) => (i.ID > j.ID) ? 1 : -1)
+
   var categories = [...new Set(timelineData.map((x) => x.Category))].sort()
 
   // 2. Use the margin convention practice 
@@ -80,6 +82,8 @@ Resume
   fillColorUnselected = "#E9E9E9"
   strokeUnselected = "#CDCDCD"
 
+  ganttPadding = 1.5
+
   var selected = timelineData.length - 1
 
   // 7. d3's line generator
@@ -103,14 +107,13 @@ Resume
   timelineContext.selectAll(".rowLines")
     .data(categories)
     .enter()
-    .append("line")
-    // Line will have two coordinates: (x1, y1), (x2, y2)    
-    .attr("x1", 0)
+    .append("line")    
+    .attr("x1", 0)  // Line will have two coordinates: (x1, y1), (x2, y2)
     .attr("x2", width)
     .attr("y1", function(d, i) { return (i + 0.5) * y_space + y_start })
     .attr("y2", function(d, i) { return (i + 0.5) * y_space + y_start })
     .attr("stroke", gridlines)
-    .attr("stroke-width", 1)
+    .attr("stroke-width", 0.5)
 
   timelineContext.selectAll(".rowLabels")
     .data(categories)
@@ -132,15 +135,15 @@ Resume
     .text(function(d) { return d.year; })
     .attr("fill", labelColors)
 
-  var gantt = timelineContext.selectAll(".ganttLines")
+  var timelineGanttLines = timelineContext.selectAll(".ganttLines")
     .data(timelineData)
-    .enter().append("rect")
+    .enter()
+    .append("rect")
     .attr("class","ganttRect")
     .attr("rx", 1)
-    .attr("x", function(d) { return xScale(d.Beginning) })
-    .attr("width", function(d) { return xScale(d.Ending) - xScale(d.Beginning) })
-    .attr("y", function(d) {
-      return (categories.indexOf(d.Category) - .375) * y_space + y_start})
+    .attr("x", function(d) { return xScale(d.Beginning) + ganttPadding })
+    .attr("width", function(d) { return xScale(d.Ending) - xScale(d.Beginning) - ganttPadding })
+    .attr("y", function(d) { return (categories.indexOf(d.Category) - .375) * y_space + y_start})
     .attr("height", y_space * .75 )
     .attr("stroke-opacity", 1)
     .style("stroke-width", 2)
@@ -158,21 +161,54 @@ Resume
       selectedState = d.state
       update();
     })
-    
-    var update = function() {
 
-      // Update Gantt visualizations
-      gantt.transition()
-        .duration(400)
-        .attr("stroke", function(d, i) {
-          if (i === selected) { return strokeSelected }
-          else { return strokeUnselected }
-        })
-        .attr("fill",function(d,i){
-          if (i === selected) { return fillColorSelected }
-          else { return fillColorUnselected }
-        });
-    }
+  var detailContext = d3.select(".resume-detail")
+  
+  var detailEntries = detailContext.selectAll(".details")
+    .data(timelineData)
+    .enter()
+    .append("div")
+    .html(function(d) { 
+      cur_array = d.Details.map(function(x) {return "<li>" + x + "</li>"})
+      cur_string = "<ul>" + cur_array.join("") + "</ul>"
+      return cur_string
+    })
+    .attr("class", function(d, i) {
+      if (i === selected) { return "show" } else { return "hidden" }
+    })
+    .style("opacity", function(d, i) { 
+      if (i === selected) { return 1 } else { return 0 }
+    })
+    .style("display", function(d, i) {
+      if (i === selected) { return "block" } else { return "none" }
+    })
+
+    
+  // Update Gantt visualizations
+  var update = function() {
+    timelineGanttLines.transition()
+      .duration(200)
+      .attr("stroke", function(d, i) {
+        if (i === selected) { return strokeSelected }
+        else { return strokeUnselected }
+      })
+      .attr("fill",function(d,i){
+        if (i === selected) { return fillColorSelected }
+        else { return fillColorUnselected }
+      });
+
+    detailEntries.transition()
+      .duration(400)
+      .attr("class", function(d, i) {
+        if (i === selected) { return "show" } else { return "hidden" }
+      })
+      .style("opacity", function(d, i) {
+        if (i === selected) { return 1 } else { return 0 }
+      })
+      .style("display", function(d, i) {
+        if (i === selected) { return "block" } else { return "none" }
+      })
+  }
 
 </script>
 
