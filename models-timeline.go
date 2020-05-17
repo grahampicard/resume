@@ -20,12 +20,6 @@ type timelineEvent struct {
 	State     []string `bson:"state,omitempty"`
 }
 
-type mapStruct struct {
-	ID   string `json:"id"`
-	Name string `json:"n"`
-	Data string `json:"d"`
-}
-
 func getEvents() []timelineEvent {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	client, err := mongo.Connect(ctx, options.Client().ApplyURI("mongodb://localhost:27017"))
