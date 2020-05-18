@@ -81,6 +81,16 @@
   },
   {
     "id": 8,
+    "category":"Work",
+    "beginning":"2019-06-01",
+    "ending": "2019-08-31",
+    "entry":"Amazon.com",
+    "details":["Senior Product Manager - Technical Intern","Performance Display Advertising","International Expansion"],
+    "state":["NY"],
+    "display_location": "New York, NY"
+  },
+  {
+    "id": 9,
     "category":"Education",
     "beginning":"2018-08-01",
     "ending": null,

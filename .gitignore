@@ -1,3 +1,5 @@
 *.code-workspace
 *.exe
 resume-rebuild*
+make.ps1
+Makefile
