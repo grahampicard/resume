@@ -20,7 +20,7 @@ type timelineEvent struct {
 	State     []string `bson:"state,omitempty"`
 }
 
-func getEvents() []timelineEvent {
+func getEntries() []timelineEvent {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	client, err := mongo.Connect(ctx, options.Client().ApplyURI("mongodb://localhost:27017"))
 

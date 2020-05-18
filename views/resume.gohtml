@@ -39,7 +39,8 @@ Resume
   var end_date = boundaries[1]
   var x_tick_start = 100
   var parser = d3.timeParse("%Y-%m-%d")
-  var timelineData = {{.}}
+  var timelineData = {{.Timeline}}
+  var mapData = {{.Map}}
 
   timelineData.forEach(function(x) {
     x.Beginning = parser(x.Beginning)
@@ -61,6 +62,9 @@ Resume
   var height = window.innerHeight - margin.top - margin.bottom; // Use the window's height */}}
   var width = Math.min(window.innerWidth * 0.8, 650)
   var height = (window.innerWidth <= 400) ? 280 * .625 : 220
+
+  var mapHeight = Math.min(window.innerWidth * .8, 350) * .625
+  var mapWidth = Math.min(window.innerWidth * .8, 350)
 
   var xScale = d3.scaleTime().rangeRound([x_tick_start, width])
   xScale.domain(d3.extent(axis, function(d) { return d.date}))
@@ -85,6 +89,7 @@ Resume
   ganttPadding = 1.5
 
   var selected = timelineData.length - 1
+  var selectedState = timelineData[selected].State
 
   // 7. d3's line generator
   var line = d3.line()
@@ -158,12 +163,11 @@ Resume
     })
     .on("click", function(d, i) {
       selected = i;
-      selectedState = d.state
+      selectedState = d.State
       update();
     })
 
   var detailContext = d3.select(".resume-detail")
-  
   var detailEntries = detailContext.selectAll(".details")
     .data(timelineData)
     .enter()
@@ -183,7 +187,41 @@ Resume
       if (i === selected) { return "block" } else { return "none" }
     })
 
-    
+  var mapContext = d3.select(".resume-map")
+    .append("svg")
+    .attr("width", mapWidth + margin.left + margin.right)
+    .attr("height", mapHeight + margin.top + margin.bottom)
+    .append("g")
+
+  var mapPlot = mapContext.selectAll(".states")
+        .data(mapData)
+        .enter()
+        .append("path")
+        .attr("class","state")
+        .attr("d",function(d) { return d.Data; })
+        .attr("transform", "scale(" + mapHeight / 600 + ") translate(" + 9 + ", 0)")
+        .style("fill", function(d, i) {
+          if (selectedState.indexOf(d.ID) > -1) {
+            return fillColorSelected
+          } else {
+            return fillColorUnselected
+          }
+        })
+        .attr("stroke-width", function(d, i) {
+          if (selectedState.indexOf(d.ID) > -1) {
+            return 3
+          } else {
+            return 1
+          }
+        })
+        .attr("stroke", function(d, i) {
+          if (selectedState.indexOf(d.ID) > -1) {
+            return strokeSelected
+          } else {
+            return strokeUnselected
+          }
+        })
+
   // Update Gantt visualizations
   var update = function() {
     timelineGanttLines.transition()
@@ -208,6 +246,21 @@ Resume
       .style("display", function(d, i) {
         if (i === selected) { return "block" } else { return "none" }
       })
+
+      mapPlot.transition()
+        .duration(400)
+        .style("fill", function(d, i){
+          if (selectedState.indexOf(d.ID) > -1) { return fillColorSelected } 
+          else { return fillColorUnselected }
+        })
+        .attr("stroke-width", function(d, i) {
+          if (selectedState.indexOf(d.ID) > -1) { return 3 } 
+          else { return 1 }
+        })
+        .attr("stroke", function(d, i) {
+          if (selectedState.indexOf(d.ID) > -1) { return strokeSelected } 
+          else { return strokeUnselected }
+        })
   }
 
 </script>

@@ -7,8 +7,12 @@ print('Connected!\n')
 
 // let's find the # of docs in our `docs` collection
 docCount = db.docs.count()
-print("There are " + docCount + " records")
+print("There are " + docCount + " doc records")
 
-// now, let's show the first 20 docs
-myDocs = db.docs.find().toArray()
-printjson(myDocs)
+// // now, let's show the first 20 docs
+// myDocs = db.docs.find().toArray()
+// printjson(myDocs)
+
+// let's find the # of states in our map collection
+mapCount = db.map.count()
+print("There are " + mapCount + " map records")
