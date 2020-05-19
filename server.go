@@ -3,13 +3,34 @@ package main
 import (
 	"net/http"
 	"os"
+	"path/filepath"
 	"strings"
 
 	"github.com/go-chi/chi"
 )
 
-func getRoutes() chi.Router {
+// FileServer conveniently sets up a http.FileServer handler to serve
+// static files from a http.FileSystem.
+func FileServer(r chi.Router, path string, root http.FileSystem) {
+	if strings.ContainsAny(path, "{}*") {
+		panic("FileServer does not permit any URL parameters.")
+	}
 
+	if path != "/" && path[len(path)-1] != '/' {
+		r.Get(path, http.RedirectHandler(path+"/", 301).ServeHTTP)
+		path += "/"
+	}
+	path += "*"
+
+	r.Get(path, func(w http.ResponseWriter, r *http.Request) {
+		rctx := chi.RouteContext(r.Context())
+		pathPrefix := strings.TrimSuffix(rctx.RoutePattern(), "/*")
+		fs := http.StripPrefix(pathPrefix, http.FileServer(root))
+		fs.ServeHTTP(w, r)
+	})
+}
+
+func getRoutes() chi.Router {
 	r := chi.NewRouter()
 	r.Get("/", indexController)
 	r.Get("/resume", resumeController)
@@ -17,7 +38,6 @@ func getRoutes() chi.Router {
 	r.Get("/projects", projectsController)
 	addStaticFileServer(r, "/static/", "static")
 	return r
-
 }
 
 func getEnv(key string, fallback string) string {
@@ -29,6 +49,10 @@ func getEnv(key string, fallback string) string {
 
 func main() {
 	r := getRoutes()
-	r.Handle("/static/", http.StripPrefix(strings.TrimRight("/static/", "/"), http.FileServer(http.Dir("./static/"))))
+
+	workDir, _ := os.Getwd()
+	filesDir := http.Dir(filepath.Join(workDir, "static"))
+	FileServer(r, "/static", filesDir)
+
 	http.ListenAndServe(":"+getEnv("PORT", "8080"), r)
 }

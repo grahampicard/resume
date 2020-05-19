@@ -18,98 +18,90 @@ Resume
   <div class="resume-map"></div>
   <div class="resume-detail"></div>    
 </div>
-
 <script src="https://d3js.org/d3.v5.min.js"></script>
 <script>
+// Data imports
+// 0. Declare SVG dimension
+var margin = {top: 10, right: 10, bottom: 10, left: 10},
+    width = Math.min(window.innerWidth * 0.8, 650),
+    height = 220
 
-  // 1. Collect data
-  var yearGenerator = function(x, i) {
-    cur_year = i + start_year
-    return {
-      year: cur_year,
-      date: new Date(cur_year, 0, 1)
-    }
-  }
+var mapWidth = Math.min(window.innerWidth * .8, 350),
+    mapHeight = mapWidth * .625
 
-  var start_year = 2010
-  var end_year = new Date().getFullYear() + 1
-  var axis = Array.from(new Array(end_year - start_year), yearGenerator)
-  var boundaries = d3.extent(axis, function(d) { return d.date })
-  var start_date = boundaries[0]
-  var end_date = boundaries[1]
-  var x_tick_start = 100
-  var parser = d3.timeParse("%Y-%m-%d")
-  var timelineData = {{.Timeline}}
-  var mapData = {{.Map}}
+// 1. Import timeline data
+var parser = d3.timeParse("%Y-%m-%d"),
+    timelineData = {{.Timeline}},
+    categories = [...new Set(timelineData.map((x) => x.Category))].sort()
 
-  timelineData.forEach(function(x) {
+timelineData.sort((i, j) => (i.ID > j.ID) ? 1 : -1)
+  .forEach(function(x) {
     x.Beginning = parser(x.Beginning)
-
-    if (x.Ending == "") {
-      x.Ending = new Date()
-    } else {
-      x.Ending = parser(x.Ending)   
-    }
+    if (x.Ending == "") { x.Ending = new Date() }
+    else { x.Ending = parser(x.Ending) }
   })
 
-  timelineData.sort((i, j) => (i.ID > j.ID) ? 1 : -1)
+// 2. Import map data
+var mapData = {{.Map}}
 
-  var categories = [...new Set(timelineData.map((x) => x.Category))].sort()
+// 3. Create axes for our timeline graph
+var yearGenerator = function(x, i) {
+  cur_year = i + start_year
+  return {
+    year: cur_year,
+    date: new Date(cur_year, 0, 1)
+  }
+}
 
-  // 2. Use the margin convention practice 
-  var margin = {top: 10, right: 10, bottom: 10, left: 10}
-  {{/* var width = window.innerWidth - margin.left - margin.right // Use the window's width 
-  var height = window.innerHeight - margin.top - margin.bottom; // Use the window's height */}}
-  var width = Math.min(window.innerWidth * 0.8, 650)
-  var height = (window.innerWidth <= 400) ? 280 * .625 : 220
+var start_year = 2010,
+    end_year = new Date().getFullYear() + 1,
+    axis = Array.from(new Array(end_year - start_year), yearGenerator),
+    boundaries = d3.extent(axis, function(d) { return d.date }),
+    x_tick_start = 100
 
-  var mapHeight = Math.min(window.innerWidth * .8, 350) * .625
-  var mapWidth = Math.min(window.innerWidth * .8, 350)
+// 4. Create scales for our axes
+var xScale = d3.scaleTime().rangeRound([x_tick_start, width])
+    xScale.domain(d3.extent(axis, function(d) { return d.date}))
 
-  var xScale = d3.scaleTime().rangeRound([x_tick_start, width])
-  xScale.domain(d3.extent(axis, function(d) { return d.date}))
+var yScale = d3.scaleLinear()
+  .domain([0, categories.length]) // input 
+  .range([height, 0]); // output 
 
-  // 6. Y scale will use the randomly generate number 
-  var yScale = d3.scaleLinear()
-    .domain([0, categories.length]) // input 
-    .range([height, 0]); // output 
+var y_start = height * 0.35,
+    y_space = (height - y_start) / categories.length,
+    ganttPadding = 1.5
+    
+// 5. Choose colors    
+var gridlines = "#DEDEDE",
+    labelColors = "#828282",
+    fillColorSelected = "#00adef",
+    strokeSelected = "#83c9f4",
+    fillColorUnselected = "#E9E9E9",
+    strokeUnselected = "#CDCDCD"
 
-  // Add in labels for timeline
-  y_start = height * 0.35
-  y_space = (height - y_start) / categories.length 
+// 6. Initialize selected item (most recent)
+var selected = timelineData.length - 1
+var selectedState = timelineData[selected].State
 
-  gridlines = "#DEDEDE",
-  labelColors = "#828282"
+// 7. Initialize a line generator for axes
+var line = d3.line()
+  .x(function(d, i) { return xScale(i); }) // set the x values for the line generator
+  .y(function(d) { return yScale(d.y); }) // set the y values for the line generator 
 
-  fillColorSelected = "#00adef"
-  strokeSelected = "#83c9f4"
-  fillColorUnselected = "#E9E9E9"
-  strokeUnselected = "#CDCDCD"
+// 8. Declare boundaries for X & y axis
+var dataset = d3.range(boundaries[0] - boundaries[1])
+  .map(function(d) { return {"y": d3.randomUniform(1)() } })
 
-  ganttPadding = 1.5
-
-  var selected = timelineData.length - 1
-  var selectedState = timelineData[selected].State
-
-  // 7. d3's line generator
-  var line = d3.line()
-    .x(function(d, i) { return xScale(i); }) // set the x values for the line generator
-    .y(function(d) { return yScale(d.y); }) // set the y values for the line generator 
-    .curve(d3.curveMonotoneX) // apply smoothing to the line
-
-  // 8. An array of objects of length N. Each object has key -> value pair, the key being "y" and the value is a random number
-  var dataset = d3.range(start_date - end_date)
-    .map(function(d) { return {"y": d3.randomUniform(1)() } })
-
-  // 1. Add the SVG to the page and employ #2
-  var timelineContext = d3.select(".resume-gantt")
+// 9. Create page elements:
+// A. Timeline
+var timelineContext = d3.select(".resume-gantt")
     .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
-    {{/* .attr("transform", "translate(" + margin.left + "," + margin.top + ")"); */}}
 
-  timelineContext.selectAll(".rowLines")
+// add row-lines to separate categories
+timelineContext.selectAll(".rowLines")
     .data(categories)
     .enter()
     .append("line")    
@@ -120,7 +112,8 @@ Resume
     .attr("stroke", gridlines)
     .attr("stroke-width", 0.5)
 
-  timelineContext.selectAll(".rowLabels")
+// add labels for each category
+timelineContext.selectAll(".rowLabels")
     .data(categories)
     .enter()
     .append("text")
@@ -130,17 +123,19 @@ Resume
     .attr("y", function(d, i) { return (i + 0.5) * y_space + 0.9 * y_start })
     .attr("fill", labelColors)
 
-  timelineContext.selectAll(".columnLabels")
+// add year labels for the x axis
+timelineContext.selectAll(".columnLabels")
     .data(axis)
     .enter().append("text")
     .attr("class","axisLabels")
-    .attr("x", function(d) { return xScale(d.date); })
-    .attr("y", function(d, i) { return y_start * .3; })
+    .attr("x", function(d) { return xScale(d.date) })
+    .attr("y", function(d, i) { return y_start * .3 })
     .attr("text-anchor","middle")
-    .text(function(d) { return d.year; })
+    .text(function(d) { return d.year - 2000 })
     .attr("fill", labelColors)
 
-  var timelineGanttLines = timelineContext.selectAll(".ganttLines")
+// 10. add gantt bars for each year
+var timelineGanttLines = timelineContext.selectAll(".ganttLines")
     .data(timelineData)
     .enter()
     .append("rect")
@@ -154,115 +149,118 @@ Resume
     .style("stroke-width", 2)
     .style("cursor", "pointer")
     .attr("stroke", function(d, i) {
-      if (d.ID == selected) { return strokeSelected } 
-      else { return strokeUnselected }
+    if (d.ID == selected) { return strokeSelected } 
+    else { return strokeUnselected }
     })
     .attr("fill", function(d, i) {
-      if (d.ID == selected) { return fillColorSelected }
-      else { return fillColorUnselected }
+    if (d.ID == selected) { return fillColorSelected }
+    else { return fillColorUnselected }
     })
     .on("click", function(d, i) {
-      selected = i;
-      selectedState = d.State
-      update();
+    selected = i;
+    selectedState = d.State
+    update();
     })
 
-  var detailContext = d3.select(".resume-detail")
-  var detailEntries = detailContext.selectAll(".details")
-    .data(timelineData)
-    .enter()
-    .append("div")
-    .html(function(d) { 
+// 11 Add area for detail card
+var detailContext = d3.select(".resume-detail")
+var detailEntries = detailContext.selectAll(".details")
+  .data(timelineData)
+  .enter()
+  .append("div")
+  .html(function(d) { 
+      title = "<h3>" + d.Entry + "</h3>"
       cur_array = d.Details.map(function(x) {return "<li>" + x + "</li>"})
-      cur_string = "<ul>" + cur_array.join("") + "</ul>"
+      cur_string = title + "<ul>" + cur_array.join("") + "</ul>"
       return cur_string
-    })
-    .attr("class", function(d, i) {
+  })
+  .attr("class", function(d, i) {
       if (i === selected) { return "show" } else { return "hidden" }
-    })
-    .style("opacity", function(d, i) { 
+  })
+  .style("opacity", function(d, i) { 
       if (i === selected) { return 1 } else { return 0 }
+  })
+  .style("display", function(d, i) {
+      if (i === selected) { return "block" } else { return "none" }
+  })
+
+// 12. Add context for map
+var mapContext = d3.select(".resume-map")
+  .append("svg")
+  .attr("width", mapWidth + margin.left + margin.right)
+  .attr("height", mapHeight + margin.top + margin.bottom)
+  .append("g")
+
+// 13. Add state states
+var mapPlot = mapContext.selectAll(".states")
+    .data(mapData)
+    .enter()
+    .append("path")
+    .attr("class","state")
+    .attr("d",function(d) { return d.Data; })
+    .attr("transform", "scale(" + mapHeight / 600 + ") translate(" + 9 + ", 0)")
+    .style("fill", function(d, i) {
+        if (selectedState.indexOf(d.ID) > -1) {
+        return fillColorSelected
+        } else {
+        return fillColorUnselected
+        }
+    })
+    .attr("stroke-width", function(d, i) {
+        if (selectedState.indexOf(d.ID) > -1) {
+        return 3
+        } else {
+        return 1
+        }
+    })
+    .attr("stroke", function(d, i) {
+        if (selectedState.indexOf(d.ID) > -1) {
+        return strokeSelected
+        } else {
+        return strokeUnselected
+        }
+    })
+
+// 14. Update function to change D3 design.
+var update = function() {
+timelineGanttLines.transition()
+    .duration(200)
+    .attr("stroke", function(d, i) {
+    if (i === selected) { return strokeSelected }
+    else { return strokeUnselected }
+    })
+    .attr("fill",function(d,i){
+    if (i === selected) { return fillColorSelected }
+    else { return fillColorUnselected }
+    });
+
+detailEntries.transition()
+    .duration(400)
+    .attr("class", function(d, i) {
+    if (i === selected) { return "show" } else { return "hidden" }
+    })
+    .style("opacity", function(d, i) {
+    if (i === selected) { return 1 } else { return 0 }
     })
     .style("display", function(d, i) {
-      if (i === selected) { return "block" } else { return "none" }
+    if (i === selected) { return "block" } else { return "none" }
     })
 
-  var mapContext = d3.select(".resume-map")
-    .append("svg")
-    .attr("width", mapWidth + margin.left + margin.right)
-    .attr("height", mapHeight + margin.top + margin.bottom)
-    .append("g")
-
-  var mapPlot = mapContext.selectAll(".states")
-        .data(mapData)
-        .enter()
-        .append("path")
-        .attr("class","state")
-        .attr("d",function(d) { return d.Data; })
-        .attr("transform", "scale(" + mapHeight / 600 + ") translate(" + 9 + ", 0)")
-        .style("fill", function(d, i) {
-          if (selectedState.indexOf(d.ID) > -1) {
-            return fillColorSelected
-          } else {
-            return fillColorUnselected
-          }
-        })
-        .attr("stroke-width", function(d, i) {
-          if (selectedState.indexOf(d.ID) > -1) {
-            return 3
-          } else {
-            return 1
-          }
-        })
-        .attr("stroke", function(d, i) {
-          if (selectedState.indexOf(d.ID) > -1) {
-            return strokeSelected
-          } else {
-            return strokeUnselected
-          }
-        })
-
-  // Update Gantt visualizations
-  var update = function() {
-    timelineGanttLines.transition()
-      .duration(200)
-      .attr("stroke", function(d, i) {
-        if (i === selected) { return strokeSelected }
-        else { return strokeUnselected }
-      })
-      .attr("fill",function(d,i){
-        if (i === selected) { return fillColorSelected }
+    mapPlot.transition()
+    .duration(400)
+    .style("fill", function(d, i){
+        if (selectedState.indexOf(d.ID) > -1) { return fillColorSelected } 
         else { return fillColorUnselected }
-      });
-
-    detailEntries.transition()
-      .duration(400)
-      .attr("class", function(d, i) {
-        if (i === selected) { return "show" } else { return "hidden" }
-      })
-      .style("opacity", function(d, i) {
-        if (i === selected) { return 1 } else { return 0 }
-      })
-      .style("display", function(d, i) {
-        if (i === selected) { return "block" } else { return "none" }
-      })
-
-      mapPlot.transition()
-        .duration(400)
-        .style("fill", function(d, i){
-          if (selectedState.indexOf(d.ID) > -1) { return fillColorSelected } 
-          else { return fillColorUnselected }
-        })
-        .attr("stroke-width", function(d, i) {
-          if (selectedState.indexOf(d.ID) > -1) { return 3 } 
-          else { return 1 }
-        })
-        .attr("stroke", function(d, i) {
-          if (selectedState.indexOf(d.ID) > -1) { return strokeSelected } 
-          else { return strokeUnselected }
-        })
-  }
-
+    })
+    .attr("stroke-width", function(d, i) {
+        if (selectedState.indexOf(d.ID) > -1) { return 3 } 
+        else { return 1 }
+    })
+    .attr("stroke", function(d, i) {
+        if (selectedState.indexOf(d.ID) > -1) { return strokeSelected } 
+        else { return strokeUnselected }
+    })
+}
 </script>
 
 {{end}}
