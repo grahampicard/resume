@@ -3,3 +3,4 @@
 resume-rebuild*
 make.ps1
 Makefile
+.env
