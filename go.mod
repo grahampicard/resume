@@ -11,6 +11,6 @@ require (
 	github.com/kr/pty v1.1.8 // indirect
 	github.com/lib/pq v1.3.0 // indirect
 	github.com/ogier/pflag v0.0.1 // indirect
-	go.mongodb.org/mongo-driver v1.3.2
+	go.mongodb.org/mongo-driver v1.3.3
 	golang.org/x/sys v0.0.0-20200409092240-59c9f1ba88fa // indirect
 )
