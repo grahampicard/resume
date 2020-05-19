@@ -36,6 +36,9 @@ func getRoutes() chi.Router {
 	r.Get("/resume", resumeController)
 	r.Get("/about", aboutController)
 	r.Get("/projects", projectsController)
+	r.Get("/projects/{id:[a-z]+}", projectpageController)
+	r.Get("/api/map", apiMap)
+	r.Get("/api/timeline", apiTimeline)
 	addStaticFileServer(r, "/static/", "static")
 	return r
 }

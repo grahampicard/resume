@@ -9,17 +9,7 @@ func indexController(w http.ResponseWriter, r *http.Request) {
 }
 
 func resumeController(w http.ResponseWriter, r *http.Request) {
-	type resumeData struct {
-		Timeline []timelineEvent
-		Map      []mapStruct
-	}
-
-	contextData := resumeData{
-		Timeline: entries,
-		Map:      maps,
-	}
-
-	tmpl["resume"].Execute(w, contextData)
+	tmpl["resume"].Execute(w, nil)
 }
 
 func projectsController(w http.ResponseWriter, r *http.Request) {

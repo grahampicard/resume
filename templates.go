@@ -13,5 +13,5 @@ func init() {
 	tmpl["resume"] = m(p("views/resume.gohtml", "views/layout.gohtml"))
 	tmpl["about"] = m(p("views/about.gohtml", "views/layout.gohtml"))
 	tmpl["projects"] = m(p("views/projects.gohtml", "views/layout.gohtml"))
-
+	tmpl["projectPage"] = m(p("views/projectPage.gohtml", "views/layout.gohtml"))
 }

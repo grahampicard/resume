@@ -39,10 +39,10 @@ func getEntries() []timelineEvent {
 		panic(err)
 	}
 
-	var events []timelineEvent
-	if err = cursor.All(ctx, &events); err != nil {
+	var entries []timelineEvent
+	if err = cursor.All(ctx, &entries); err != nil {
 		panic(err)
 	}
 
-	return events
+	return entries
 }
