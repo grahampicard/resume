@@ -11,12 +11,9 @@
     </div>
     <div class="projects-list">
     <section>
-        <a href="">World Baseball Classic Forecasts</a>
-        <a href="">March Madness</a>
-        <a href="">Spotify & Songkick Artist Tool</a>
-        <a href="">NWEA Assessment Tool</a>
-        <a href="">Survey Monkey API Wrapper</a>
-        <a href="">Pitchfork Scraper</a>
+      {{range .Portfolio}}
+      <a href="projects/{{.ID}}">{{.Name}}</a>
+      {{ end }}
     </section>
     </div>
 </div>

@@ -6,7 +6,7 @@ type mapStruct struct {
 	Data string `bson:"d,omitempty"`
 }
 
-type timelineEvent struct {
+type timelineEventStruct struct {
 	// ID        primitive.ObjectID `bson:"_id,omitempty"`
 	ID        int      `bson:"id,omitempty"`
 	Category  string   `bson:"category,omitempty"`
@@ -15,4 +15,19 @@ type timelineEvent struct {
 	Entry     string   `bson:"entry,omitempty"`
 	Details   []string `bson:"details,omitempty"`
 	State     []string `bson:"state,omitempty"`
+}
+
+type whereStruct struct {
+	Text string
+	Link string
+}
+
+type portfolioStruct struct {
+	ID       string        `bson:"id,omitempty"`
+	Name     string        `bson:"name,omitempty"`
+	Category string        `bson:"category,omitempty"`
+	Why      string        `bson:"why,omitempty"`
+	How      string        `bson:"how,omitempty"`
+	What     []string      `bson:"what,omitempty"`
+	Where    []whereStruct `bson:"where,omitempty"`
 }

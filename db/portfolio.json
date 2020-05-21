@@ -1,0 +1,101 @@
+[
+    {
+        "id":"nwea",
+        "name": "NWEA Assessment Tool",
+        "category": "dashboard",
+        "subhead": "Featured at the Harvard Strategic Data Project Institute",
+        "why": "Many school data managers are former teachers and don't have techincal training to develop ETL (extract-transform-load) processes. I developed this tool to take care of the 'heavy lifting' in prepping data for analysis and reporting.",
+        "how": "Proof-of-Concept tool which: processes raw CSVs, restructures them into database friendly format, and creates charts ready for decks",
+        "what": ["R/Shiny", "Highcharts.js"],
+        "where": [
+            {
+                "text": "App",
+                "link": "https://grahampicard.shinyapps.io/shinydashboard-map/"
+            },
+            {
+                "text": "Code",
+                "link": "https://github.com/grahampicard/shinydashboard-map"
+            }
+        ]
+    },
+    {
+        "id":"spotify",
+        "name": "Spotify & Songkick Artist Tool",
+        "category": "dashboard",
+        "why": "Spotify and Songkick make interesting song attributes available through their public APIs, and a simple web-app can make this data digestible to non-technical audiences",
+        "how": "Dashboard which overviews audio features (tempo, duration, loudness, etc.) for each track on an album, as well as a snapshot of the last 50 concerts that the artist/group has performed.",
+        "what": ["R/Shiny", "Highcharts.js"],
+        "where": [
+            {
+                "text": "App",
+                "link": "https://grahampicard.shinyapps.io/artist-analyzer/"
+            },
+            {
+                "text": "Code",
+                "link": "https://github.com/grahampicard/spotify-album-vizualizer"
+            }
+        ]
+    },
+    {
+        "id":"marchmadness",
+        "name": "Fordham March Madness",
+        "category": "dashboard",
+        "why": "Each year, students in <a href=\"https://twitter.com/TravisRPetersen?lang=en\">Travis Petersen</a>'s Fordham Sports Analytics spring class create models to predict the outcomes of the NCAA March Madness tournament. Initially, the class was using a google sheet to track results",
+        "how": "I developed a site to summarize the results of each game and the performance of the class' predictions. On the homepage, you can see the loss (error) of the classes predictions. Click into each date to see the results of students' predictions",
+        "what": ["React (Frontend)", "Flask (Backend)"],
+        "where": [
+            {
+                "text": "App",
+                "link": "http://fordhamsportsanalytics.com/"
+            }
+        ]
+    },
+    {
+        "id":"wbc",
+        "name": "World Baseball Classic Forecasts",
+        "category": "dashboard",
+        "why": "Every four years, the World Baseball Classic takes over the MLB offseason. It’s a rare opportunity where sabermetricians and stats fans can compare the parity of international leagues. By creating a tool that compares player ranking and projecting performance, baseball fans can learn more about how leagues compare to one another",
+        "how": "The site takes <a href=\"https://twitter.com/TravisRPetersen?lang=en\">Travis Petersen</a>'s forecasted odds over the course of the tournament and compare the simulated performance of individual players. Calculations, projections, and data collection by Travis Petersen. Visualizations and front end development by me.",
+        "what": ["R/Shiny", "Highcharts.js"],
+        "where": [
+            {
+                "text": "App",
+                "link": "https://travisrpetersen.shinyapps.io/wbc_predictions/"
+            }
+        ]
+    },
+    {
+        "id":"surveymonkey",
+        "name": "Survey Monkey API Wrapper",
+        "category": "api",
+        "why": "I was managing evaluations for a 3,500+ person event, with over ~150 sessions held over four days. I wrote a simple API wrapper to pull data directly from SurveyMonkey's API to create Tableau Dashboards",
+        "how": "This is just for data collection and transformation. It gets the survey details for a given survey and all the responses for a given survey.",
+        "what": ["Python"],
+        "where": [
+            {
+                "text": "Code",
+                "link": "https://github.com/grahampicard/survey-monkey-api-wrapper"
+            }
+        ]
+    },
+    {
+        "id":"spotifypitchfork",
+        "name": "Spotify & Pitchfork",
+        "category": "api",
+        "why": "When I was first learning Python, I wanted to come up with a project that blended my interests in writing and music. I decided to write a short blog post in which I analyzed my Spotify library to see how my listening habits compare to those ",
+        "how": "It's a simple script which uses Spotify's developer API and collects data from Pitchfork's public API.",
+        "what": ["Python"],
+        "where": [
+            {
+                "text": "Code",
+                "link": "https://github.com/grahampicard/spotify_pitchfork_metadata"
+            },
+            {
+                "text": "Blog",
+                "link": "https://thesottovoce.wordpress.com/"
+            }
+        ]
+    }
+]
+
+
