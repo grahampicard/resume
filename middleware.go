@@ -13,6 +13,7 @@ import (
 // Delcarations for local vars updated in init()
 var databaseURL = "mongodb://localhost:27017"
 var ok bool
+
 var entries []timelineEvent
 var maps []mapStruct
 
@@ -29,7 +30,7 @@ func init() {
 }
 
 func getMap() []mapStruct {
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	client, err := mongo.Connect(ctx, options.Client().ApplyURI(databaseURL))
 
 	// Defers prevent data leaks
