@@ -30,8 +30,10 @@ func init() {
 }
 
 func getMap() []mapStruct {
-	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	client, err := mongo.Connect(ctx, options.Client().ApplyURI(databaseURL))
+
+	print(databaseURL)
 
 	// Defers prevent data leaks
 	defer cancel()
@@ -41,7 +43,7 @@ func getMap() []mapStruct {
 	}
 
 	// Get most recent timeline data
-	timelineCollection := client.Database("test").Collection("map")
+	timelineCollection := client.Database("resume").Collection("map")
 	cursor, err := timelineCollection.Find(context.TODO(), bson.M{})
 
 	if err != nil {
@@ -68,7 +70,7 @@ func getEntries() []timelineEvent {
 	}
 
 	// Get most recent timeline data
-	timelineCollection := client.Database("test").Collection("docs")
+	timelineCollection := client.Database("resume").Collection("docs")
 	cursor, err := timelineCollection.Find(ctx, bson.M{})
 
 	if err != nil {

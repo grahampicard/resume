@@ -1,5 +1,5 @@
 mongo --eval "db.docs.drop()"
-mongoimport --jsonArray --db test --collection docs --file timeline.json
+mongoimport --jsonArray --db resume --collection docs --file timeline.json
 
 mongo --eval "db.map.drop()"
-mongoimport --jsonArray --db test --collection map --file map.json
+mongoimport --jsonArray --db resume --collection map --file map.json
