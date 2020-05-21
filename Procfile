@@ -1,1 +1,1 @@
-web: ./bin/resume-rebuild
+web: bin/resume-rebuild
