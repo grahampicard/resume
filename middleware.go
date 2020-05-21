@@ -2,8 +2,8 @@ package main
 
 import (
 	"context"
+	"log"
 	"os"
-	"time"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -13,6 +13,7 @@ import (
 // Delcarations for local vars updated in init()
 var databaseURL = "mongodb://localhost:27017"
 var ok bool
+var db *mongo.Database
 
 var entries []timelineEvent
 var maps []mapStruct
@@ -25,25 +26,24 @@ func init() {
 		panic("You must supply the DATABASE_URL")
 	}
 
+	clientOptions := options.Client().ApplyURI(databaseURL)
+	client, err := mongo.Connect(context.TODO(), clientOptions)
+
+	err = client.Ping(context.TODO(), nil)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	db = client.Database("resume")
 	entries = getEntries()
 	maps = getMap()
 }
 
 func getMap() []mapStruct {
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-	client, err := mongo.Connect(ctx, options.Client().ApplyURI(databaseURL))
-
-	print(databaseURL)
-
-	// Defers prevent data leaks
-	defer cancel()
-	defer client.Disconnect(ctx)
-	if err != nil {
-		panic(err)
-	}
 
 	// Get most recent timeline data
-	timelineCollection := client.Database("resume").Collection("map")
+	timelineCollection := db.Collection("map")
 	cursor, err := timelineCollection.Find(context.TODO(), bson.M{})
 
 	if err != nil {
@@ -59,26 +59,17 @@ func getMap() []mapStruct {
 }
 
 func getEntries() []timelineEvent {
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-	client, err := mongo.Connect(ctx, options.Client().ApplyURI("mongodb://localhost:27017"))
-
-	// Defers prevent data leaks
-	defer cancel()
-	defer client.Disconnect(ctx)
-	if err != nil {
-		panic(err)
-	}
 
 	// Get most recent timeline data
-	timelineCollection := client.Database("resume").Collection("docs")
-	cursor, err := timelineCollection.Find(ctx, bson.M{})
+	timelineCollection := db.Collection("docs")
+	cursor, err := timelineCollection.Find(context.TODO(), bson.M{})
 
 	if err != nil {
 		panic(err)
 	}
 
 	var entries []timelineEvent
-	if err = cursor.All(ctx, &entries); err != nil {
+	if err = cursor.All(context.TODO(), &entries); err != nil {
 		panic(err)
 	}
 
