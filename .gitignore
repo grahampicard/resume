@@ -4,3 +4,4 @@ resume-rebuild*
 make.ps1
 Makefile
 .env
+init_db_hidden.sh
