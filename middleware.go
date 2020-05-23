@@ -15,15 +15,11 @@ var databaseURL = "mongodb://localhost:27017"
 var ok bool
 var db *mongo.Database
 
-var entries []timelineEvent
-var maps []mapStruct
-
 func init() {
 
 	databaseURL, ok = os.LookupEnv("MONGODB_URI")
 	if !ok {
-		// e.g.: YourUserName:YourPassword@YourHost:5432/YourDatabase
-		panic("You must supply the DATABASE_URL")
+		panic("You must supply the MONGODB_URI")
 	}
 
 	clientOptions := options.Client().ApplyURI(databaseURL)
@@ -36,13 +32,11 @@ func init() {
 	}
 
 	db = client.Database("resume")
-	entries = getEntries()
-	maps = getMap()
+
 }
 
 func getMap() []mapStruct {
-
-	// Get most recent timeline data
+	// Query MAP collection
 	timelineCollection := db.Collection("map")
 	cursor, err := timelineCollection.Find(context.TODO(), bson.M{})
 
@@ -58,9 +52,8 @@ func getMap() []mapStruct {
 	return mapStates
 }
 
-func getEntries() []timelineEvent {
-
-	// Get most recent timeline data
+func getEntries() []timelineEventStruct {
+	// Query TIMELINE collection
 	timelineCollection := db.Collection("docs")
 	cursor, err := timelineCollection.Find(context.TODO(), bson.M{})
 
@@ -68,10 +61,41 @@ func getEntries() []timelineEvent {
 		panic(err)
 	}
 
-	var entries []timelineEvent
+	var entries []timelineEventStruct
 	if err = cursor.All(context.TODO(), &entries); err != nil {
 		panic(err)
 	}
 
 	return entries
+}
+
+func getPortfolio() []portfolioStruct {
+	// Query PORTFOLIO collection
+	timelineCollection := db.Collection("portfolio")
+	cursor, err := timelineCollection.Find(context.TODO(), bson.M{})
+
+	if err != nil {
+		panic(err)
+	}
+
+	var portfolio []portfolioStruct
+	if err = cursor.All(context.TODO(), &portfolio); err != nil {
+		panic(err)
+	}
+
+	return portfolio
+}
+
+func getPortfolioItem(id string) portfolioStruct {
+	// Query PORTFOLIO collection
+	var result portfolioStruct
+
+	timelineCollection := db.Collection("portfolio")
+	err := timelineCollection.FindOne(context.TODO(), bson.M{"id": id}).Decode(&result)
+
+	if err != nil {
+		panic(err)
+	}
+
+	return result
 }

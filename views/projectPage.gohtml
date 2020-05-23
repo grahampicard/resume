@@ -6,6 +6,31 @@
 
 {{define "content"}}
 <div class="projects">
-  Here {{.ID}}
+  {{.ID}}
+  {{.Category}}
+  <div class="project-page-why">
+    <h2>Why?</h2>
+    <p>{{.Why}}</p>
+  </div>
+  <div class="project-page-how">
+    <h2>How it works</h2>
+    <p>{{.How}}</p>
+  </div>  
+  <div class="project-page-what">
+    <h2>What it's made with</h2>
+    {{ range .What}}
+      <div>{{.}}</div>
+    {{ end }}
+  </div>
+  <div class="project-page-what">
+    <h2>Links</h2>
+    {{ range .Where}}
+      <a href="{{.Link}}">{{.Text}}</a>
+    {{ end }}
+  </div>
+  <div class="project-page-img">
+    <img src="{{.Img}}">
+  </div>
+  <div class="project-page-back"><a href="/projects">←</a></div>
 </div>
 {{end}}
