@@ -30,4 +30,5 @@ type portfolioStruct struct {
 	How      string        `bson:"how,omitempty"`
 	What     []string      `bson:"what,omitempty"`
 	Where    []whereStruct `bson:"where,omitempty"`
+	Img      string        `bson:"img,omitempty"`
 }

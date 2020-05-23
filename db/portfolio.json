@@ -16,7 +16,9 @@
                 "text": "Code",
                 "link": "https://github.com/grahampicard/shinydashboard-map"
             }
-        ]
+        ],
+        "date": "Oct 2016",
+        "img": "/static/img/nwea.png"
     },
     {
         "id":"spotify",
@@ -34,7 +36,9 @@
                 "text": "Code",
                 "link": "https://github.com/grahampicard/spotify-album-vizualizer"
             }
-        ]
+        ],
+        "date": "Feb 2017",
+        "img": "/static/img/spotify.png"
     },
     {
         "id":"marchmadness",
@@ -48,7 +52,9 @@
                 "text": "App",
                 "link": "http://fordhamsportsanalytics.com/"
             }
-        ]
+        ],
+        "date": "Mar 2018",
+        "img": "/static/img/marchmadness.png"
     },
     {
         "id":"wbc",
@@ -62,7 +68,9 @@
                 "text": "App",
                 "link": "https://travisrpetersen.shinyapps.io/wbc_predictions/"
             }
-        ]
+        ],
+        "date": "Mar 2017",
+        "img": "/static/img/wbc.png"
     },
     {
         "id":"surveymonkey",
@@ -76,7 +84,9 @@
                 "text": "Code",
                 "link": "https://github.com/grahampicard/survey-monkey-api-wrapper"
             }
-        ]
+        ],
+        "date": "Aug 2017",
+        "img": "/static/img/surveymonkey.png"
     },
     {
         "id":"spotifypitchfork",
@@ -94,8 +104,8 @@
                 "text": "Blog",
                 "link": "https://thesottovoce.wordpress.com/"
             }
-        ]
+        ],
+        "date": "Aug 2016",
+        "img": "/static/img/spotifypitchfork.png"
     }
 ]
-
-
