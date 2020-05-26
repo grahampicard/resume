@@ -28,13 +28,16 @@ body {
     color: #5f6368;
     margin: 0px;
     padding: 0px;
+    min-height: 900px;
+    display: flex;
+    flex-direction: column;
 }
 
 .content {
-    padding-top: 100px;
-    padding-bottom: 100px;
     width: 650px;
     margin: auto;
+    margin-top: 100px;
+    padding-bottom: 100px;
 }
 
 footer {
@@ -98,13 +101,12 @@ a:hover {
 
 .navbar ul li {
     margin: auto;
-    padding: 10px;
+    padding-right: 20px;
 }
 
 /* Footer Content */
 .footer-content {
     margin: auto;
-    padding: 10px;
     display: flex;
     align-items: center;
     width: 650px;
@@ -112,6 +114,7 @@ a:hover {
 }
 
 .footer-content a {
+    padding: 10px;
     margin: auto;
 }
 
@@ -325,6 +328,8 @@ a:hover {
 .project-page-img img {
     /* width: 300px;
     border-radius: 4px; */
+    display: block;
+    margin: auto;
     box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.05), 0px 1px 1px 0px rgba(0,0,0,0.05), 0px 1px 3px 0px rgba(0,0,0,0.05);
 }
 
@@ -349,6 +354,10 @@ a:hover {
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+.project-page #screenshot-label {
+    display: none;
 }
 
 .modal-content {

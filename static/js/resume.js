@@ -8,7 +8,7 @@ var margin = {top: 10, right: 10, bottom: 0, left: 10}
 var timelineWidth = Math.min(window.innerWidth * 0.8, 550)
 var height = 150
 
-var mapWidth = Math.min(window.innerWidth * .8, 200)
+var mapWidth = Math.min(window.innerWidth * .8, 220)
 var mapHeight = mapWidth * .625
 
 // 1. Import timeline data
@@ -35,7 +35,7 @@ var start_year = 2010
 var end_year = new Date().getFullYear() + 1
 var axis = Array.from(new Array(end_year - start_year), yearGenerator)
 var boundaries = d3.extent(axis, function(d) { return d.date })
-var x_tick_start = 100
+var x_tick_start = 80
 
 // 4. Create scales for our axes
 var xScale = d3.scaleTime().rangeRound([x_tick_start, timelineWidth])
