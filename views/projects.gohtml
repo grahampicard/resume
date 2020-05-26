@@ -7,14 +7,13 @@
 {{define "content"}}
 <div class="projects">
     <div class="projects-heading">
-        <h1>Selected Portfolio</h1>
+        <h1>Projects</h1>
+        <p>Dashboards and API tools for data practitioners</p>
     </div>
     <div class="projects-list">
-    <section>
       {{range .Portfolio}}
       <a href="projects/{{.ID}}">{{.Name}}</a>
       {{ end }}
-    </section>
     </div>
 </div>
 {{end}}

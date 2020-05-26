@@ -15,6 +15,7 @@ type timelineEventStruct struct {
 	Entry     string   `bson:"entry,omitempty"`
 	Details   []string `bson:"details,omitempty"`
 	State     []string `bson:"state,omitempty"`
+	Location  string   `bson:"display_location,omitempty"`
 }
 
 type whereStruct struct {
@@ -31,4 +32,5 @@ type portfolioStruct struct {
 	What     []string      `bson:"what,omitempty"`
 	Where    []whereStruct `bson:"where,omitempty"`
 	Img      string        `bson:"img,omitempty"`
+	Caption  string        `bson:"caption,omitempty"`
 }
