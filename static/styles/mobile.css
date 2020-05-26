@@ -90,6 +90,7 @@
     
     /* Projects */
     .projects-list {
+        margin-top: 0.67em;
         grid-template-columns: repeat(2, 1fr);
     }
 
