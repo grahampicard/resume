@@ -46,13 +46,17 @@
         "id":"marchmadness",
         "name": "Fordham March Madness",
         "category": "dashboard",
-        "why": "Each year, students in <a href=\"https://twitter.com/TravisRPetersen?lang=en\">Travis Petersen</a>'s Fordham Sports Analytics spring class create models to predict the outcomes of the NCAA March Madness tournament. Initially, the class was using a google sheet to track results",
+        "why": "Each year, students in Travis Petersen's (Sr. Data Scientist - MLBAM) Fordham Sports Analytics spring class create models to predict the outcomes of the NCAA March Madness tournament. Initially, the class was using a google sheet to track results",
         "how": "I developed a site to summarize the results of each game and the performance of the class' predictions. On the homepage, you can see the loss (error) of the classes predictions. Click into each date to see the results of students' predictions",
         "what": ["React (Frontend)", "Flask (Backend)"],
         "where": [
             {
                 "text": "App",
                 "link": "http://fordhamsportsanalytics.com/"
+            },
+            {
+                "text": "Travis Petersen on Twitter",
+                "link": "https://twitter.com/TravisRPetersen?lang=en"
             }
         ],
         "date": "Mar 2018",
@@ -64,12 +68,16 @@
         "name": "World Baseball Classic Forecasts",
         "category": "dashboard",
         "why": "Every four years, the World Baseball Classic takes over the MLB offseason. It’s a rare opportunity where sabermetricians and stats fans can compare the parity of international leagues. By creating a tool that compares player ranking and projecting performance, baseball fans can learn more about how leagues compare to one another",
-        "how": "The site takes <a href=\"https://twitter.com/TravisRPetersen?lang=en\">Travis Petersen</a>'s forecasted odds over the course of the tournament and compare the simulated performance of individual players. Calculations, projections, and data collection by Travis Petersen. Visualizations and front end development by me.",
+        "how": "The site takes Travis Petersen's (Sr. Data Scientist - MLBAM) forecasted odds over the course of the tournament and compare the simulated performance of individual players. Calculations, projections, and data collection by Travis Petersen. Visualizations and front end development by me.",
         "what": ["R/Shiny", "Highcharts.js"],
         "where": [
             {
                 "text": "App",
                 "link": "https://travisrpetersen.shinyapps.io/wbc_predictions/"
+            },
+            {
+                "text": "Travis Petersen on Twitter",
+                "link": "https://twitter.com/TravisRPetersen?lang=en"
             }
         ],
         "date": "Mar 2017",
