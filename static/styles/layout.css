@@ -422,6 +422,7 @@ a:hover {
     grid-column: 2;
     grid-row: 1;
     margin: auto;
+    width: 250px;
 }
 
 .about-headshot img {
