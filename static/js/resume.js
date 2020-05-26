@@ -4,16 +4,16 @@
 //   mapData:      entries for the map
 
 // 0. Declare SVG dimension
-var margin = {top: 10, right: 10, bottom: 0, left: 10},
-    timelineWidth = Math.min(window.innerWidth * 0.8, 550),
-    height = 150
+var margin = {top: 10, right: 10, bottom: 0, left: 10}
+var timelineWidth = Math.min(window.innerWidth * 0.8, 550)
+var height = 150
 
-var mapWidth = Math.min(window.innerWidth * .8, 200),
-    mapHeight = mapWidth * .625
+var mapWidth = Math.min(window.innerWidth * .8, 200)
+var mapHeight = mapWidth * .625
 
 // 1. Import timeline data
-var parser = d3.timeParse("%Y-%m-%d"),
-    categories = [...new Set(timelineData.map((x) => x.Category))].sort()
+var parser = d3.timeParse("%Y-%m-%d")
+var categories = [...new Set(timelineData.map((x) => x.Category))].sort()
 
 timelineData.sort((i, j) => (i.ID > j.ID) ? 1 : -1)
     .forEach(function(x) {
@@ -26,16 +26,16 @@ timelineData.sort((i, j) => (i.ID > j.ID) ? 1 : -1)
 var yearGenerator = function(x, i) {
     cur_year = i + start_year
     return {
-    year: cur_year,
-    date: new Date(cur_year, 0, 1)
+        year: cur_year,
+        date: new Date(cur_year, 0, 1)
     }
 }
 
-var start_year = 2010,
-    end_year = new Date().getFullYear() + 1,
-    axis = Array.from(new Array(end_year - start_year), yearGenerator),
-    boundaries = d3.extent(axis, function(d) { return d.date }),
-    x_tick_start = 100
+var start_year = 2010
+var end_year = new Date().getFullYear() + 1
+var axis = Array.from(new Array(end_year - start_year), yearGenerator)
+var boundaries = d3.extent(axis, function(d) { return d.date })
+var x_tick_start = 100
 
 // 4. Create scales for our axes
 var xScale = d3.scaleTime().rangeRound([x_tick_start, timelineWidth])
@@ -45,17 +45,18 @@ var yScale = d3.scaleLinear()
     .domain([0, categories.length]) // input 
     .range([height, 0]); // output 
 
-var y_start = height * 0.35,
-    y_space = (height - y_start) / categories.length,
-    ganttPadding = 2
+var y_start = height * 0.35
+var y_space = (height - y_start) / categories.length
+var ganttPadding = 2
     
 // 5. Choose colors    
-var gridlines = "#DEDEDE",
-    labelColors = "#828282",
-    fillColorSelected = "#83b4d4",
-    strokeSelected = "#83c9f4",
-    fillColorUnselected = "#E9E9E9",
-    strokeUnselected = "#CDCDCD"
+var gridlines = "#DEDEDE"
+var labelColors = "#828282"
+// var fillColorSelected = "#83b4d4"
+var fillColorSelected = "#aed6b0"
+var strokeSelected = "#EEE"
+var fillColorUnselected = "#E9E9E9"
+var strokeUnselected = "#CDCDCD"
 
 // 6. Initialize selected item (most recent)
 var selected = timelineData.length - 1
@@ -152,31 +153,22 @@ var timelineGanttLines = timelineContext.selectAll(".ganttLines")
 
 // 11 Add area for detail card
 var detailContext = d3.select(".resume-detail")
-var detailEntries = detailContext.selectAll(".details")
-    .data(timelineData)
-    .enter()
-    .append("div")
-    .html(function(d) { 
-        title = "<h3>" + d.Entry + "</h3>"
+var detailTitle = detailContext.append("h4")
+    .text(timelineData[selected].Entry)
+
+var detailDesc = detailContext.append("ul")
+    .html(function() { 
+        d = timelineData[selected]
         cur_array = d.Details.map(function(x) {return "<li>" + x + "</li>"})
-        cur_string = title + "<ul>" + cur_array.join("") + "</ul>"
+        cur_string = cur_array.join("")
         return cur_string
-    })
-    .attr("class", function(d, i) {
-        if (i === selected) { return "show" } else { return "hidden" }
-    })
-    .style("opacity", function(d, i) { 
-        if (i === selected) { return 1 } else { return 0 }
-    })
-    .style("display", function(d, i) {
-        if (i === selected) { return "block" } else { return "none" }
     })
 
 // 12. Add context for map
 var mapContext = d3.select(".resume-map")
 
-var mapTitle = mapContext.append("h3")
-    .text(timelineData[selected].Category)
+var mapTitle = mapContext.append("h4")
+    .text(timelineData[selected].Location)
 
 var mapSVG = mapContext.append("svg")
     .attr("width", mapWidth )
@@ -213,10 +205,6 @@ var mapPlot = mapSVG.selectAll(".states")
 var update = function() {
     timelineGanttLines.transition()
         .duration(200)
-        // .attr("stroke", function(d, i) {
-        //     if (i === selected) { return strokeSelected }
-        //     else { return strokeUnselected }
-        // })
         .attr("fill",function(d,i){
             if (i === selected) { return fillColorSelected }
             else { return fillColorUnselected }
@@ -226,20 +214,19 @@ var update = function() {
             else { return "ganttRect ganttRectUnselected" }
         });
 
-    detailEntries.transition()
-        .duration(0)
-        .attr("class", function(d, i) {
-            if (i === selected) { return "show" } else { return "hidden" }
-        })
-        .style("opacity", function(d, i) {
-            if (i === selected) { return 1 } else { return 0 }
-        })
-        .style("display", function(d, i) {
-            if (i === selected) { return "block" } else { return "none" }
+    detailTitle.transition()
+        .text(timelineData[selected].Entry)
+
+    detailDesc
+        .html(function() { 
+            d = timelineData[selected]
+            cur_array = d.Details.map(function(x) {return "<li>" + x + "</li>"})
+            cur_string = cur_array.join("")
+            return cur_string
         })
 
     mapTitle.transition()
-        .text(timelineData[selected].Category)
+        .text(timelineData[selected].Location)
 
     mapPlot.transition()
         .duration(200)

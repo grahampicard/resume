@@ -18,7 +18,8 @@
             }
         ],
         "date": "Oct 2016",
-        "img": "/static/img/nwea.png"
+        "img": "/static/img/nwea.png",
+        "caption": "Quartile shift graphs to show change in performance over time"
     },
     {
         "id":"spotify",
@@ -38,7 +39,8 @@
             }
         ],
         "date": "Feb 2017",
-        "img": "/static/img/spotify.png"
+        "img": "/static/img/spotify.png",
+        "caption": "Graph of spotify audio features for an album"
     },
     {
         "id":"marchmadness",
@@ -54,7 +56,8 @@
             }
         ],
         "date": "Mar 2018",
-        "img": "/static/img/marchmadness.png"
+        "img": "/static/img/marchmadness.png",
+        "caption": "Results page showing a distribution of estimated likelihood of winning for the March 2018 tournament"
     },
     {
         "id":"wbc",
@@ -70,7 +73,8 @@
             }
         ],
         "date": "Mar 2017",
-        "img": "/static/img/wbc.png"
+        "img": "/static/img/wbc.png",
+        "caption": "Player detail view, showing player strength in key metrics"
     },
     {
         "id":"surveymonkey",
@@ -86,11 +90,12 @@
             }
         ],
         "date": "Aug 2017",
-        "img": "/static/img/surveymonkey.png"
+        "img": "/static/img/surveymonkey.png",
+        "caption": "just a logo - it's more fun than screenshotting code"
     },
     {
         "id":"spotifypitchfork",
-        "name": "Spotify & Pitchfork",
+        "name": "Spotify & Pitchfork Analysis",
         "category": "api",
         "why": "When I was first learning Python, I wanted to come up with a project that blended my interests in writing and music. I decided to write a short blog post in which I analyzed my Spotify library to see how my listening habits compare to those ",
         "how": "It's a simple script which uses Spotify's developer API and collects data from Pitchfork's public API.",
@@ -106,6 +111,7 @@
             }
         ],
         "date": "Aug 2016",
-        "img": "/static/img/spotifypitchfork.png"
+        "img": "/static/img/spotifypitchfork.png",
+        "caption": "Blog post found at link provided"
     }
 ]

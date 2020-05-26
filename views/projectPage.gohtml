@@ -5,32 +5,44 @@
 {{end}}
 
 {{define "content"}}
-<div class="projects">
-  {{.ID}}
-  {{.Category}}
-  <div class="project-page-why">
-    <h2>Why?</h2>
-    <p>{{.Why}}</p>
+<div class="project-page">
+  <div class="heading">
+    <h1>{{.Name}}</h1>
   </div>
-  <div class="project-page-how">
-    <h2>How it works</h2>
-    <p>{{.How}}</p>
-  </div>  
-  <div class="project-page-what">
-    <h2>What it's made with</h2>
-    {{ range .What}}
-      <div>{{.}}</div>
-    {{ end }}
+  <div class="summary-text">
+    <div class="project-page-why">
+      <h4>Why?</h4>
+      <p>{{.Why}}</p>
+    </div>
+    <div class="project-page-how">
+      <h4>How it works</h4>
+      <p>{{.How}}</p>
+    </div>  
+    <div class="project-page-what">
+      <h4>What it's made with</h4>
+      {{ range .What}}
+        <div>{{.}}</div>
+      {{ end }}
+    </div>
+    <div class="project-page-where">
+      <h4>Links</h4>
+      <ul>
+      {{ range .Where}}
+        <li><a href="{{.Link}}">{{.Text}}</a></li>
+      {{ end }}
+      </ul>
+    </div>
   </div>
-  <div class="project-page-what">
-    <h2>Links</h2>
-    {{ range .Where}}
-      <a href="{{.Link}}">{{.Text}}</a>
-    {{ end }}
+  <div class="project-page-img">    
+    <img id="myImg" class="snapshot" src="{{.Img}}" style="max-width:300px">
+    <p id="page-caption" class="caption">{{.Caption}}</p>
+    <div id="myModal" class="modal">
+      <span class="close">&times;</span>
+      <img class="modal-content" id="img01">
+      <div id="caption"></div>
+    </div>
   </div>
-  <div class="project-page-img">
-    <img src="{{.Img}}">
-  </div>
+  <script src="/static/js/modalbox.js"></script>
   <div class="project-page-back"><a href="/projects">←</a></div>
 </div>
 {{end}}

@@ -14,7 +14,7 @@
     "category":"Work",
     "beginning":"2010-05-01", 
     "ending":"2010-08-01",
-    "entry":"United States House of Representatives",
+    "entry":"US House of Representatives",
     "details":["Congressional Intern","Rep. John Campbell - California 48th"],
     "state": ["VA"],
     "display_location": "Washington, DC"
@@ -34,7 +34,7 @@
     "category":"Work",
     "beginning":"2014-07-01",
     "ending":"2014-09-01",
-    "entry":"National Geographic - Ice Cream Expedition",
+    "entry":"Nat Geo - Ice Cream Expedition",
     "details":["Educational programs for kids to learn what it means to be an explorer","Drove an ice cream truck"],
     "state": ["GA", "AL", "TN", "KY", "IL", "MS", "LA"],
     "display_location": "Various States"
@@ -47,14 +47,14 @@
     "entry":"Music",
     "details":["Songwriting, scoring, arranging, and composition consulting","Guitar/Keys for local artists and church worship bands"],
     "state": ["CA", "NY"],
-    "display_location": "San Francisco + OC, CA / New York, NY"
+    "display_location": "SF, OC, NYC"
   },
   {
     "id":5,
     "category":"Work",
     "beginning":"2014-12-01",
     "ending":"2015-07-01",
-    "entry":"KIPP Foundation Research & Evaluation Team",
+    "entry":"KIPP: Research & Evaluation Team",
     "details":["Analysis decks + presentations, grant proposal research","Automated reporting, Quantitative Modeling, VBA/SQL Server"],
     "state": ["CA"],
     "display_location": "San Francisco, CA"
@@ -64,8 +64,8 @@
     "category":"Work",
     "beginning":"2015-07-01",
     "ending":"2018-08-01",
-    "entry":"KIPP Foundation Insight & Analytics Team",
-    "details":["Business intelligence product lead","Program evaluation, internal support, and data strategy","Database development"],
+    "entry":"KIPP: Insight & Analytics Team",
+    "details":["Business intelligence product lead","Program evaluation, internal support, and data strategy","Data engineering"],
     "state": ["CA", "NY"],
     "display_location": "San Francisco, CA / New York, NY"
   },
@@ -85,7 +85,7 @@
     "beginning":"2019-06-01",
     "ending": "2019-08-31",
     "entry":"Amazon.com",
-    "details":["Senior Product Manager - Technical Intern","Performance Display Advertising","International Expansion"],
+    "details":["Product Manager - Technical Intern","Performance Display Advertising","International Expansion"],
     "state":["NY"],
     "display_location": "New York, NY"
   },
@@ -93,9 +93,9 @@
     "id": 9,
     "category":"Education",
     "beginning":"2018-08-01",
-    "ending": null,
+    "ending":"2020-05-18",
     "entry":"Yale School of Management",
-    "details":["MBA Candidate","Data Analytics Club Founder","Tech Club Leader"],
+    "details":["MBA Candidate","Data Analytics Club Founder","Tech Club Leader", "Courses in Applied Machine Learning, Applied Deep Learning, and Applied Quant Finance"],
     "state":["CT"],
     "display_location": "New Haven, CT"
   }
