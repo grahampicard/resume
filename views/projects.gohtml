@@ -10,7 +10,7 @@
         <h1>Projects</h1>
         <p>A selection of dashboards, API wrappers, and analyses</p>
     </div>
-    <div class="projects-list card">
+    <div class="card projects-list">
       {{range .Portfolio}}
       <a href="projects/{{.ID}}" class="mdc-button mdc-button--raised mdc--theme-primary mdc-ripple-upgraded mdc-ripple-upgraded--foreground-deactivation">{{.Name}}</a>
       {{ end }}

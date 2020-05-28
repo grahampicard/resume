@@ -13,7 +13,7 @@
 
     header {
         display: flex;
-        width: auto;
+        width: 100%;
         margin: auto;
         padding: 0;
         align-items: center;
@@ -29,8 +29,13 @@
         padding: 0px;
     }
 
+    .navbar-container {
+        margin: auto;
+        width: 100%;
+    }
+
     .navbar {
-        width: 100vw;
+        width: auto;
         grid-template-columns: 1fr;
         grid-template-rows: repeat(2, 1fr);
     }
@@ -48,6 +53,11 @@
 
     .navbar ul {
         min-height: inherit;
+    }
+
+    .navbar ul li {
+        margin: auto;
+        padding-right: 0 1rem;
     }
 
     footer {
@@ -181,9 +191,9 @@
     }
 
     /* About */
-    .about {
+    .about-information {
         display: flex;
-        flex-direction: column-reverse;
+        flex-direction: column;
     }
 
     .about h3 {
