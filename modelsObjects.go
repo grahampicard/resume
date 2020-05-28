@@ -33,4 +33,5 @@ type portfolioStruct struct {
 	Where    []whereStruct `bson:"where,omitempty"`
 	Img      string        `bson:"img,omitempty"`
 	Caption  string        `bson:"caption,omitempty"`
+	Date     string        `bson:"date,omitempty"`
 }

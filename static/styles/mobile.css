@@ -24,7 +24,8 @@
     .content {
         display: flex;
         width: auto;
-        margin: 137px 20px 70px 20px;
+        margin: 4.5em auto 4.5em auto;
+        min-width: 100vw;
         padding: 0px;
     }
 
@@ -65,15 +66,16 @@
         margin: auto;
     }
 
+    .card {
+        padding: 1em;
+        margin: 0.5em;
+    }
+
     /* Pages */
     /* Index */
     .index {
         margin: auto;
         text-align: center;
-    }
-
-    .index h1 {
-        margin-bottom: 40px;
     }
 
     .index-timeblock {
@@ -92,6 +94,7 @@
     .projects-list {
         margin-top: 0.67em;
         grid-template-columns: repeat(2, 1fr);
+        gap: 0.75em;
     }
 
     .project-page {

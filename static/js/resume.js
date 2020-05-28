@@ -5,7 +5,7 @@
 
 // 0. Declare SVG dimension
 var margin = {top: 10, right: 10, bottom: 0, left: 10}
-var timelineWidth = Math.min(window.innerWidth * 0.8, 550)
+var timelineWidth = Math.min(window.innerWidth * 0.8, 530)
 var height = 150
 
 var mapWidth = Math.min(window.innerWidth * .8, 220)
@@ -53,7 +53,7 @@ var ganttPadding = 2
 var gridlines = "#DEDEDE"
 var labelColors = "#828282"
 // var fillColorSelected = "#83b4d4"
-var fillColorSelected = "#aed6b0"
+var fillColorSelected = "#a5d6a7"
 var strokeSelected = "#EEE"
 var fillColorUnselected = "#E9E9E9"
 var strokeUnselected = "#CDCDCD"
