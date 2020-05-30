@@ -17,7 +17,7 @@
         margin: auto;
         padding: 0;
         align-items: center;
-        position: fixed;
+        position: absolute;
         background-color: white;
     }
 
@@ -27,6 +27,10 @@
         margin: 4.5em auto 4.5em auto;
         min-width: 100vw;
         padding: 0px;
+    }
+
+    .heading {
+        text-align: center;
     }
 
     .navbar-container {
@@ -157,9 +161,6 @@
     .resume {
         width: 100%
     }
-    .resume-heading {
-        text-align: center;
-    }
 
     .resume-interactions {
         display: flex;
@@ -191,9 +192,6 @@
     }
 
     /* About */
-    .about-heading {
-        text-align: center;
-    }
 
     .about-information {
         display: flex;
