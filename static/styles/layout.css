@@ -54,7 +54,7 @@ html {
 
 body {
     font-family: "Raleway";
-    background-color: #90a4ae;
+    background-color: #fafafa;
     /* background-color: #E1E2E1; 3c5e71 acb4c1 90a4ae */
     color: #5f6368;
     margin: 0px;
@@ -169,7 +169,7 @@ h1 {
     padding: 2em;
     margin: 15px;
     border-radius: 3px;
-    box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
+    box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
 }
 
 .card p {
@@ -434,6 +434,9 @@ h1 {
   }  
 
 /* About Page */
+.about {
+    margin: auto;
+}
 .about-information {
     display: grid;
     grid-template-columns: repeat(2, 50%);

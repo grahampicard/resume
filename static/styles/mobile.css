@@ -191,6 +191,10 @@
     }
 
     /* About */
+    .about-heading {
+        text-align: center;
+    }
+
     .about-information {
         display: flex;
         flex-direction: column;
