@@ -323,7 +323,7 @@ h1 {
 .projects-list {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2em;
+    gap: 1em;
     padding: 0;
     background: none;
     box-shadow: none;
