@@ -480,6 +480,11 @@ h1 {
     grid-row: 1;
 }
 
+.about-text h3 {
+    text-align: center;
+    border-bottom: solid 0.5px #DEDEDE;
+}
+
 .about-headshot {
     grid-column: 2;
     grid-row: 1;
