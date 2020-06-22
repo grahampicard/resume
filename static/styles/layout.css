@@ -95,8 +95,8 @@ h1 {
 
 
 #navbar-name {
-    background: linear-gradient(217deg, rgba(223, 105, 105, 0.8), rgba(204, 132, 90, 0) 70.71%), 
-                linear-gradient(127deg, rgba(160, 255, 160, 0.8), rgba(155, 207, 155, 0) 70.71%), 
+    background: linear-gradient(217deg, rgba(105, 219, 223, 0.8), rgba(204, 132, 90, 0) 70.71%), 
+                linear-gradient(127deg, rgba(122, 196, 122, 0.8), rgba(155, 207, 155, 0) 70.71%), 
                 linear-gradient(336deg, rgba(133, 133, 221, 0.8), rgba(65, 65, 216, 0) 70.71%);
     background-size: 400% 400%;
     -webkit-background-clip: text;
@@ -324,7 +324,7 @@ h1 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1em;
-    padding: 0;
+    margin: 1em;
     background: none;
     box-shadow: none;
 }

@@ -40,7 +40,10 @@
     }
 
     .navbar {
-        width: auto;
+        width: 100%;
+        position: fixed;
+        background-color: inherit;
+        box-shadow: inherit;
         grid-template-columns: 1fr;
         grid-template-rows: repeat(2, 1fr);
     }
@@ -106,10 +109,10 @@
     }
     
     /* Projects */
-    .projects-list {
-        margin-top: 0.67em;
+    .projects-list {    
+        margin: 0.5em;
         grid-template-columns: repeat(2, 1fr);
-        gap: 0.75em;
+        gap: 0.5em;
     }
 
     .project-page {
@@ -193,7 +196,10 @@
     }
 
     /* About */
-
+    .about {
+        margin: 0px;
+        width: 100%;
+    }
     .about-information {
         display: flex;
         flex-direction: column;
