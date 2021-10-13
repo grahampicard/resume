@@ -98,5 +98,25 @@
     "details":["MBA Candidate","Data Analytics Club Founder","Tech Club Leader", "Courses in Applied Machine Learning, Applied Deep Learning, and Applied Quant Finance"],
     "state":["CT"],
     "display_location": "New Haven, CT"
+  },
+  {
+    "id": 10,
+    "category":"Work",
+    "beginning":"2020-05-19",
+    "ending":"2020-08-31",
+    "entry":"Yale School of Management: Marketing",
+    "details":["Research Assistant for Vineet Kumar","Music Emotion Recognition", "Developed CNNs and Signal Processing"],
+    "state":["CT"],
+    "display_location": "New Haven, CT"
+  },
+  {
+    "id": 11,
+    "category":"Work",
+    "beginning":"2020-09-01",
+    "ending":"2020-05-18",
+    "entry":"Yale School of Management",
+    "details":["Product Manger","Core Data Storage"],
+    "state":["NY"],
+    "display_location": "New Haven, CT"
   }
 ]
